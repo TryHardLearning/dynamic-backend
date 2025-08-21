@@ -1,0 +1,63 @@
+{
+  // Visite https://aka.ms/tsconfig para ler mais sobre este arquivo
+  "compilerOptions": {
+    // Layout dos Arquivos
+    // "rootDir" é a pasta do seu código fonte TypeScript.
+    "rootDir": "./src",
+    // "outDir" é a pasta onde os arquivos JavaScript compilados serão salvos.
+    "outDir": "./dist",
+
+    // Configurações de Ambiente
+    // "target" define a versão do JavaScript para a qual o código será compilado.
+    "target": "es2022",
+    // "module" define o sistema de módulos. 'commonjs' é o padrão para Node.js.
+    "module": "commonjs",
+
+    // Para uso com Node.js:
+    "lib": ["es2022"],
+    // Se você usar ferramentas como express, precisará das definições de tipos para o Node.js.
+    "types": ["node"],
+    // Lembre-se de instalar com `npm install --save-dev @types/node`
+
+    // Outras Saídas
+    // "sourceMap" gera arquivos de mapa de origem para depuração.
+    "sourceMap": true,
+    // "declaration" gera arquivos .d.ts para sua biblioteca ou módulo.
+    "declaration": true,
+    // "declarationMap" gera arquivos de mapa de origem para as declarações.
+    "declarationMap": true,
+
+    // Opções de Verificação de Tipo mais Estritas
+    // "strict" habilita um conjunto de verificações rigorosas de tipos.
+    "strict": true,
+    // "noUncheckedIndexedAccess": true, // Acessos a índices de arrays são tratados como potencialmente undefined.
+    // "exactOptionalPropertyTypes": true, // Garante que propriedades opcionais sem valor sejam estritamente undefined.
+
+    // Opções de Estilo
+    // "noImplicitReturns": true, // Erro se a função não retornar valor em todos os caminhos de código.
+    // "noImplicitOverride": true, // Erro ao sobrescrever um método sem a palavra-chave 'override'.
+    "noUnusedLocals": true, // Avisa sobre variáveis locais não utilizadas.
+    "noUnusedParameters": true, // Avisa sobre parâmetros de função não utilizados.
+    // "noFallthroughCasesInSwitch": true, // Erro se não houver 'break' em um 'case'.
+    // "noPropertyAccessFromIndexSignature": true, // Impede acesso a propriedades via notação de índice.
+
+    // Opções Recomendadas
+    // "strict" é a mais importante e já está ativada.
+    "esModuleInterop": true,
+    // "isolatedModules": true, // Garante que cada arquivo pode ser compilado separadamente. Útil para ferramentas como ts-node-dev.
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true, // Pula a verificação de tipo de arquivos de biblioteca, acelerando a compilação.
+    "moduleResolution": "node", // Garante que o TypeScript entenda como o Node.js resolve módulos.
+
+    // Opções de JSX (manter desativado para backend)
+    // "jsx": "react-jsx",
+    // "verbatimModuleSyntax": true,
+    // "noUncheckedSideEffectImports": true,
+    // "moduleDetection": "force",
+
+  },
+  // Inclui todos os arquivos na pasta src para o compilador TypeScript.
+  "include": [
+    "src/**/*"
+  ]
+}
