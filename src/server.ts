@@ -1,11 +1,15 @@
-// import { app } from './app'; // Importa a instância da aplicação
-// import dotenv from 'dotenv';
+import { app } from './app'; // Importa a instância da aplicação
+import dotenv from 'dotenv';
+import createConnecetionDatabase from './config/mongodb';
 
-// dotenv.config();
+dotenv.config();
 
-// const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-// app.listen(port, () => {
-//   console.log(`Servidor rodando na porta ${port}`);
-// });
+// start connection with database
+createConnecetionDatabase();
+
+app.listen(port, () => {
+  console.log(`Server Online on PORT: ${port}`);
+});
 console.log('Projeto TS rodando!');
