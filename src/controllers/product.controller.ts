@@ -58,6 +58,7 @@ const handleFindAllProducts = async (_: Request, res: Response) => {
 const handleFindProductById = async (req: Request, res: Response) => {
     try {
         const { productId } = req.body;
+        
         const product = await findProductById(productId);
         
         return res.status(200).json({ success: true, product });
@@ -75,8 +76,9 @@ const handleFindProductById = async (req: Request, res: Response) => {
 // TODO: add security to this endpoint
 const handleDeleteOneProduct = async (req: Request, res: Response) => {
     try {
-
-        await deleteOneProduct(req.body.id);
+        const { productId } = req.body;
+        
+        await deleteOneProduct(productId);
         
         return res.status(200).json({ success: true, message: 'Product deleted successfully' });
     
