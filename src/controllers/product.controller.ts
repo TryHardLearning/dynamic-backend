@@ -54,6 +54,7 @@ const handleFindAllProducts = async (_: Request, res: Response) => {
         return res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 }
+// TODO: add security to this endpoint
 const handleFindProductById = async (req: Request, res: Response) => {
     try {
         const { productId } = req.body;
@@ -71,6 +72,7 @@ const handleFindProductById = async (req: Request, res: Response) => {
     
     }
 }
+// TODO: add security to this endpoint
 const handleDeleteOneProduct = async (req: Request, res: Response) => {
     try {
 
