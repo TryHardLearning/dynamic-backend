@@ -5,7 +5,7 @@ import { HttpError } from '../utils/error.handle'; // Adjust the path as needed
 const handleRegisterUser = async (req: Request, res: Response) => {
     try {
 
-        let { name, email, password } = req.body;
+        const { name, email, password } = req.body;
 
         const { token } = await registerUser( name, email, password );
         
@@ -23,7 +23,7 @@ const handleRegisterUser = async (req: Request, res: Response) => {
 
 const handleLoginUser = async (req: Request, res: Response) => {
     try {
-        let { email, password } = req.body;
+        const { email, password } = req.body;
         
         const { token } = await loginUser( email, password );
         
