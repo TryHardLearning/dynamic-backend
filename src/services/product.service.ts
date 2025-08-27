@@ -21,7 +21,6 @@ const uploadImages = async (images: Express.Multer.File[]): Promise<string[]> =>
 // TODO: add security to this function
 const createProduct = async (name: string, description: string, price: number, category: string, subCategory: string, sizes: Array<string>, bestSeller: boolean, images: Array<any>) => {
     
-    console.log(images);
     const imageUrls = await uploadImages(images);
 
     const product = new ProductModel({
@@ -34,8 +33,6 @@ const createProduct = async (name: string, description: string, price: number, c
         bestSeller,
         image: imageUrls,
     });
-
-    console.log(product);
 
     return await product.save();
     
