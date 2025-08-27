@@ -18,7 +18,7 @@ const uploadImages = async (images: Express.Multer.File[]): Promise<string[]> =>
     );
     return imagesUrl;
 };
-
+// TODO: add security to this function
 const createProduct = async (name: string, description: string, price: number, category: string, subCategory: string, sizes: Array<string>, bestSeller: boolean, images: Array<any>) => {
     
     console.log(images);
@@ -37,17 +37,19 @@ const createProduct = async (name: string, description: string, price: number, c
 
     console.log(product);
 
-    await product.save();
-    return product;
+    return await product.save();
+    
 };
 const findAllProducts = async () => {
-
+    return await ProductModel.find({});
 }
-const findProductById = async () => {
-
+// TODO: add security to this function
+const findProductById = async (id: string) => {
+    return await ProductModel.findById(id);
 }
-const deleteOneProduct = async () => {
-
+// TODO: add security to this function
+const deleteOneProduct = async (id: string) => {
+    return await ProductModel.findByIdAndDelete(id);
 }
 
 export {createProduct, findAllProducts, findProductById, deleteOneProduct};
