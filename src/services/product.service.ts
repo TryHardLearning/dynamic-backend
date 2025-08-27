@@ -37,7 +37,7 @@ const createProduct = async (name: string, description: string, price: number, c
 
     console.log(product);
 
-    //await product.save();
+    await product.save();
     return product;
 };
 const findAllProducts = async () => {
