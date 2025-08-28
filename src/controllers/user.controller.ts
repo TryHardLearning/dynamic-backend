@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { registerUser, loginUser } from '../services/user.service';
+import { registerUser, loginUser, loginAdmin } from '../services/user.service';
 import { HttpError } from '../utils/error.handle'; // Adjust the path as needed
 
 const handleRegisterUser = async (req: Request, res: Response) => {
@@ -38,5 +38,22 @@ const handleLoginUser = async (req: Request, res: Response) => {
         return res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 };
+const handleLoginAdmin = async (req: Request, res: Response) => {
+    try {
+        const { email, password } = req.body;
+        
+        const { token } = await loginAdmin( email, password );
+        
+        return res.status(200).json({ success: true, message: 'User logged in successfully', token });
+    
+    } catch (error: any) {
+        if (error instanceof HttpError) {
+            return res.status(error.status).json({ success: error.success, message: error.message });
+        }
 
-export { handleRegisterUser, handleLoginUser };
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+};
+
+export { handleRegisterUser, handleLoginUser, handleLoginAdmin };
