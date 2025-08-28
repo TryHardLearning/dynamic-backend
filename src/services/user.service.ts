@@ -51,4 +51,12 @@ const loginUser = async ( email: string, password: string ) => {
     return { user, token };
 };
 
-export { registerUser, loginUser };
+const loginAdmin = async ( email: string, password: string ) => {
+    if( email == process.env.ADMIN_EMAIL || password == process.env.ADMIN_PASSWORD ) {
+        const token = createToken(email+password as string);
+        return { token };
+    }
+    throw new HttpError('Invalid email or password',400);
+};
+
+export { registerUser, loginUser, loginAdmin };
