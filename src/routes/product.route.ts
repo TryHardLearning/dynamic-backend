@@ -1,6 +1,6 @@
 import express from 'express';
 import upload from '../middleware/multer';
-import { handleCreateProduct, handleDeleteOneProduct, handleFindAllProducts, handleFindProductById } from '../controllers/product.controller';
+import { handleCreateProduct, handleDeleteOneProduct, handleFindAllProducts, handleFindProductById, handleRemoveOneInStock } from '../controllers/product.controller';
 import { validateCreateProduct, validateIdProduct } from '../middleware/product.middleware';
 import { adminAuthMiddleware } from '../middleware/admin.auth.middleware';
 
@@ -16,7 +16,8 @@ productRouter.post('/create', adminAuthMiddleware,
 
 
 productRouter.post('/delete', adminAuthMiddleware, validateIdProduct, handleDeleteOneProduct);
+productRouter.post('/delete/stock', adminAuthMiddleware, validateIdProduct, handleRemoveOneInStock);
 productRouter.post('/find', validateIdProduct, handleFindProductById);
-productRouter.get('/find', validateIdProduct, handleFindAllProducts);
+productRouter.get('/', handleFindAllProducts);
 
 export default productRouter;
