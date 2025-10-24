@@ -48,5 +48,8 @@ const findProductById = async (id: string) => {
 const deleteOneProduct = async (id: string) => {
     return await ProductModel.findByIdAndDelete(id);
 }
+const updateOneProduct = async (id: string, updateData: any) => {
+    return await ProductModel.findByIdAndUpdate(id, updateData, { new: true });
+};
 
-export {createProduct, findAllProducts, findProductById, deleteOneProduct};
+export {createProduct, findAllProducts, findProductById, deleteOneProduct, updateOneProduct};
