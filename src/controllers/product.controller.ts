@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { HttpError } from '../utils/error.handle';
-import { createProduct, deleteOneProduct, findAllProducts, findProductById } from '../services/product.service';
+import { createProduct, deleteOneProduct, findAllProducts, findProductById, updateOneProduct } from '../services/product.service';
 
 // Add new product
 const handleCreateProduct = async (req: Request, res: Response) => {
     try {
         
-        let { name, description, price, category, subCategory, sizes, bestSeller } = req.body;
+        const { name, description, price, category, subCategory, sizes, bestSeller } = req.body;
         
         const images = req.body.images;
 
@@ -75,5 +75,30 @@ const handleDeleteOneProduct = async (req: Request, res: Response) => {
     
     }
 }
+// TODO: add security to this endpoint
+const handleRemoveOneInStock = async (req: Request, res: Response) => {
+    try {
+        const { productId } = req.body;
 
-export { handleCreateProduct, handleFindAllProducts, handleFindProductById, handleDeleteOneProduct};
+        let product = await findProductById(productId);
+        if (!product) {
+            return res.status(404).json({ success: false, message: 'Product not found' });
+        }
+        product.inStock = false;
+        console.log(product);
+        await updateOneProduct(productId, product);
+        
+        return res.status(200).json({ success: true, message: 'Product removed from stock successfully' });
+    
+    } catch (error) {
+        if (error instanceof HttpError) {
+            return res.status(error.status).json({ success: error.success, message: error.message });
+        }
+
+        console.error(error);
+        return res.status(500).json({ success: false, message: 'Internal Server Error' });
+    
+    }
+}
+
+export { handleCreateProduct, handleFindAllProducts, handleFindProductById, handleDeleteOneProduct, handleRemoveOneInStock};
