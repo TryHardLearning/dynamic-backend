@@ -5,7 +5,7 @@ import connectToCloudinary from './config/cloudinary';
 
 dotenv.config();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 // start connection with database
 createConnecetionDatabase();
