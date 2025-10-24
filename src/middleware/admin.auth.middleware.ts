@@ -1,4 +1,4 @@
-import Jwt from "jsonwebtoken";
+import Jwt, { JwtPayload } from "jsonwebtoken";
 
 // const adminAuthMiddleware = (req: any, res: any, next: any) => {
 //     try {
@@ -28,10 +28,12 @@ import Jwt from "jsonwebtoken";
 //     }
 // }
 
+interface AdminTokenPayload extends JwtPayload {
+  id: string;
+}
 const adminAuthMiddleware = (req: any, res: any, next: any) => {
     try {
         const { token } = req.headers;
-
         if (!token) {
             return res.status(401).json({ success: false, message: 'Not Authorized' });
         }
@@ -39,9 +41,9 @@ const adminAuthMiddleware = (req: any, res: any, next: any) => {
             return res.status(500).json({ success: false, message: 'Internal Server Error' });
         }
 
-        const tokenDecode = Jwt.verify(token, process.env.JWT_SECRET);
-        if (tokenDecode === process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD) {
-            next();
+        const tokenDecode = Jwt.verify(token, process.env.JWT_SECRET) as AdminTokenPayload;
+        if (tokenDecode.id === process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD) {
+            return next();
         }
         return res.status(401).json({ success: false, message: 'Not Authorized Login' });
 
