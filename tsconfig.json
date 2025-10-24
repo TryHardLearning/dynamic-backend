@@ -1,5 +1,4 @@
 {
-  // Visite https://aka.ms/tsconfig para ler mais sobre este arquivo
   "compilerOptions": {
     // Layout dos Arquivos
     // "rootDir" é a pasta do seu código fonte TypeScript.
